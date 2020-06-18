@@ -28,13 +28,7 @@ if (sizeof($request_array['events']) > 0) {
             break;
           case "ตรวจหวย":
             $res = api_get($base, $post_header);
-            $text = "หห";
-            if(trim($res) != ""){
-              $obj = json_decode($res);
-              $data = $obj['data'];
-              $text .=  "ประจำวันที่ " . $date;
-            }
-            $reply_message = $text;
+            $reply_message = check_lotterly($res);
             break;
           default:
             $reply_message = 'ระบบได้รับข้อความ (' . $text . ') ของคุณแล้ว';
@@ -104,5 +98,22 @@ function covid19(){
 
 function infoDeveloper(){
   $text = "ชื่อนายศุภชัย บุญยิ่ง อายุ 22 ปี น้ำหนัก 68kg. สูง 170cm. ขนาดรองเท้าเบอร์ 10.5 ใช้หน่วย US";
+  return $text;
+}
+
+function check_lotterly($jsonString){
+  $text = "";
+  try{
+    $res = json_decode($jsonString);
+    if(trim($jsonString)!= ""){
+      $data = $res->data;
+      $text = "ประจำวันที่ " . $data->date;
+    }else{
+      $text .= "ไม่มีการตอบสนอง";
+    }
+  }catch(Exception $e){
+    $text = "เกิดข้อผิดพลาด</br>";
+    $text .= $e;
+  }
   return $text;
 }
