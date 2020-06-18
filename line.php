@@ -111,7 +111,10 @@ function check_lotterly($jsonString){
 
       $list = $data->prize;
       foreach($list as $key => $item){
-        $text .= " $item->name 0x100087 \n";
+        $code = '0x100087';
+        $bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
+        $emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
+        $text .= " $item->name ". $emoticon . "\n";
         foreach($item->numbers as $key=>$value){
           $text .= ($key + 1 ).") $value \n";
         }
