@@ -111,10 +111,16 @@ function check_lotterly($jsonString){
 
       $list = $data->prize;
       foreach($list as $key => $item){
-      
+        $count = 1; 
         $text .= " $item->name ".json_decode('"\uD83D\uDE00"') . "\n";
         foreach($item->numbers as $key=>$value){
-          $text .= ($key + 1 ).") $value \n";
+          $text .= "$value ";
+          if(($count % 2) == 0){
+            $text .= "\n";
+            $count = 1; 
+          }else{
+            $count++;
+          }
         }
       }
     }else{
