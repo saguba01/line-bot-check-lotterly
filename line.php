@@ -126,7 +126,7 @@ function check_lotterly($jsonString){
             $text .= "\n";
           }
         }
-        
+        $text .= "\n";
       }
     }else{
       $text .= "ไม่มีการตอบสนอง";
