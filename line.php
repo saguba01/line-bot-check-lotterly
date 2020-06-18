@@ -111,7 +111,7 @@ function check_lotterly($jsonString){
 
       $list = $data->prize;
       foreach($list as $key => $item){
-        $text .= "$item->name \n";
+        $text .= "(☞ﾟ∀ﾟ)☞ $item->name \n";
         foreach($item->numbers as $key=>$value){
           $text .= ($key + 1 ).") $value \n";
         }
