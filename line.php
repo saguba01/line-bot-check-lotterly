@@ -122,14 +122,17 @@ function check_lotterly($jsonString){
             $text .= "     ";
             $count++;
           }
+          if(($key+1) ==count($item->numbers)){
+            $text .= "\n";
+          }
         }
-        $text .= "\n";
+        
       }
     }else{
       $text .= "ไม่มีการตอบสนอง";
     }
   }catch(Exception $e){
-    $text = "เกิดข้อผิดพลาด</br>";
+    $text = "เกิดข้อผิดพลาด \n";
     $text .= $e;
   }
   return $text;
