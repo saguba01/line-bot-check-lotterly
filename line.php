@@ -1,5 +1,6 @@
 <?php
 require_once("DefineAPI.php");
+require_once("date_helper.php");
 
 $API_URL = 'https://api.line.me/v2/bot/message/reply';
 $ACCESS_TOKEN = 'YIF0qd4x9j7WwuEXucD68Mz7jq7L4vTTsSKiGx8amya/+2y98EomYT6o+ATFXTE6nzL6JCqhiwBd7vj2Ps4N/omWRtMbI1Q39R61uB0p3Kks0QNyMF9IyiZKvn6k9fRkZ81v6YY/LaoykzhwESNFMQdB04t89/1O/w1cDnyilFU='; // Access Token ค่าที่เราสร้างขึ้น
@@ -107,19 +108,20 @@ function check_lotterly($jsonString){
     $res = json_decode($jsonString);
     if(trim($jsonString)!= ""){
       $data = $res->data;
-      $text = "ประจำวันที่ $data->date \n";
+      $text = "ประจำวันที่ " .fullDate3($data->date)." \n";
 
       $list = $data->prize;
       foreach($list as $key => $item){
         $count = 1; 
-        $text .= "$item->name ".json_decode('"\uD83D\uDE00"') . "\n";
+        //json_decode('"\uD83D\uDE00"')
+        $text .= "$item->name \n";
         foreach($item->numbers as $key=>$value){
           $text .= "$value";
           if(($count % 3) == 0){
             $text .= "\n";
             $count = 1; 
           }else{
-            $text .= "     ";
+            $text .= "    ";
             $count++;
           }
           if(($key+1) == count($item->numbers)){
