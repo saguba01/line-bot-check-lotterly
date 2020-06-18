@@ -28,14 +28,13 @@ if (sizeof($request_array['events']) > 0) {
             break;
           case "ตรวจหวย":
             $res = api_get($base, $post_header);
-            $text = "";
+            $text = "หห";
             if(trim($res) != ""){
               $obj = json_decode($res);
               $data = $obj['data'];
               $text .=  "ประจำวันที่ " . $date;
             }
             $reply_message = $text;
-
             break;
           default:
             $reply_message = 'ระบบได้รับข้อความ (' . $text . ') ของคุณแล้ว';
