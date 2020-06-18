@@ -110,6 +110,7 @@ function check_lotterly($jsonString){
       $text = "ประจำวันที่ $data->date </br>";
 
       $list = $data->prize;
+      $text .= json_decode($data->prize);
       foreach($list as $key => $item){
         $text = "$item->name <br>";
       }
