@@ -112,7 +112,7 @@ function check_lotterly($jsonString){
       $list = $data->prize;
       foreach($list as $key => $item){
         $count = 1; 
-        $text .= " $item->name ".json_decode('"\uD83D\uDE00"') . "\n";
+        $text .= "$item->name ".json_decode('"\uD83D\uDE00"') . "\n";
         foreach($item->numbers as $key=>$value){
           $text .= "$value";
           if(($count % 2) == 0){
@@ -123,6 +123,7 @@ function check_lotterly($jsonString){
             $count++;
           }
         }
+        $text .= "\n";
       }
     }else{
       $text .= "ไม่มีการตอบสนอง";
