@@ -107,12 +107,11 @@ function check_lotterly($jsonString){
     $res = json_decode($jsonString);
     if(trim($jsonString)!= ""){
       $data = $res->data;
-      $text = "ประจำวันที่ $data->date </br>";
+      $text = "ประจำวันที่ $data->date \n";
 
       $list = $data->prize;
-      $text .= json_decode($data->prize);
       foreach($list as $key => $item){
-        $text = "$item->name <br>";
+        $text .= "$item->name <br>";
       }
     }else{
       $text .= "ไม่มีการตอบสนอง";
