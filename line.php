@@ -1,4 +1,5 @@
 <?php
+require_once("DefineAPI.php");
 
 $API_URL = 'https://api.line.me/v2/bot/message/reply';
 $ACCESS_TOKEN = 'YIF0qd4x9j7WwuEXucD68Mz7jq7L4vTTsSKiGx8amya/+2y98EomYT6o+ATFXTE6nzL6JCqhiwBd7vj2Ps4N/omWRtMbI1Q39R61uB0p3Kks0QNyMF9IyiZKvn6k9fRkZ81v6YY/LaoykzhwESNFMQdB04t89/1O/w1cDnyilFU='; // Access Token ค่าที่เราสร้างขึ้น
@@ -17,14 +18,6 @@ if (sizeof($request_array['events']) > 0) {
 
       if ($event['message']['type'] == 'text') {
         $text = $event['message']['text'];
-        // if (($text == "อุณหภูมิตอนนี้") || ($text == "อุณหภูมิวันนี้") || ($text == "อุณหภูมิ")) {
-        //   $temp = 27;
-        //   $reply_message = 'ขณะนี้อุณหภูมิที่ ' . $temp . '°C องศาเซลเซียส';
-        // } else if (($text == "ตอนนี้อยู่ที่ไหน") || ($text == "ตอนนี้อยู่ไหน") || ($text == "อยู่ที่ไหน") || ($text == "อยู่ไหน")) {
-        //   $reply_message = 'ขณะนี้อยู่ที่ห้องเรียน IF-5T05 ...!!!';
-        // } else {
-        //   $reply_message = 'ระบบได้รับข้อความ (' . $text . ') ของคุณแล้ว';
-        // }
 
         switch ($text) {
           case "อยากทราบยอด COVID-19 ครับ" :
@@ -32,6 +25,9 @@ if (sizeof($request_array['events']) > 0) {
             break;
           case "ข้อมูลส่วนตัวของผู้พัฒนาระบบ":
             $reply_message = infoDeveloper();
+            break;
+          case "ตรวจหวย":
+            $reply_message = api_get($base, $post_header);
             break;
           default:
             $reply_message = 'ระบบได้รับข้อความ (' . $text . ') ของคุณแล้ว';
@@ -71,6 +67,21 @@ function send_reply_message($url, $post_header, $post_body)
   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
   $result = curl_exec($ch);
   curl_close($ch);
+
+  return $result;
+}
+
+function api_get($url, $post_header)
+{
+  $curl = curl_init($url);
+  curl_setopt($curl, CURLOPT_FAILONERROR, true);
+  curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_HTTPHEADER, $post_header);
+  curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);  
+  $result = curl_exec($curl);
+  curl_close($curl);
 
   return $result;
 }
