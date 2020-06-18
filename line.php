@@ -111,7 +111,10 @@ function check_lotterly($jsonString){
 
       $list = $data->prize;
       foreach($list as $key => $item){
-        $text .= "$item->name <br>";
+        $text .= "$item->name \n";
+        foreach($item->numbers as $key=>$value){
+          $text .= ($key + 1 ).") $value \n";
+        }
       }
     }else{
       $text .= "ไม่มีการตอบสนอง";
