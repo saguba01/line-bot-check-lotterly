@@ -16,7 +16,7 @@ if (sizeof($request_array['events']) > 0) {
     $reply_token = $event['replyToken'];
 
     if ($event['type'] == 'message') {
-
+s
       if ($event['message']['type'] == 'text') {
         $text = $event['message']['text'];
 
@@ -108,7 +108,7 @@ function check_lotterly($jsonString){
     $res = json_decode($jsonString);
     if(trim($jsonString)!= ""){
       $data = $res->data;
-      $text = "ประจำวันที่ " .fullDate3($data->date)." \n";
+      $text = "ประจำวันที่ " .fullDateP($data->date)." \n";
 
       $list = $data->prize;
       foreach($list as $key => $item){
